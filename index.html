@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A BYU Provo graduation plan template for Life Sciences students exploring health-profession routes."
+    />
+    <title>BYU Life Sciences Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#planner">Skip to planner</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="BYU Life Sciences Planner home">
+          <span class="brand-mark" aria-hidden="true">LS</span>
+          <span>
+            <strong>Life Sciences Planner</strong>
+            <small>BYU Provo · planning template</small>
+          </span>
+        </a>
+        <button class="text-button" id="printButton" type="button">Print / save PDF</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">A clearer path forward</p>
+          <h1 id="hero-title">Build a health-profession plan that fits your goals.</h1>
+          <p class="hero-text">
+            Choose a Life Sciences major, a pre-professional route, and a manageable science load.
+            The planner sequences representative prerequisite courses first, then reserves your final
+            two semesters for major completion.
+          </p>
+          <div class="hero-note">
+            <span class="note-icon" aria-hidden="true">i</span>
+            <p>This is a planning template—not an official degree audit. Confirm requirements with BYU and each professional school.</p>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orb orb-large"></div>
+          <div class="orb orb-small"></div>
+          <div class="leaf leaf-one"></div>
+          <div class="leaf leaf-two"></div>
+          <span class="hero-label">learn<br />serve<br />heal</span>
+        </div>
+      </section>
+
+      <section class="planner-shell" id="planner" aria-labelledby="setup-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 01</p>
+            <h2 id="setup-title">Set up your plan</h2>
+          </div>
+          <p class="section-caption">Start with the choices that shape your sequence.</p>
+        </div>
+
+        <form id="setupForm" class="setup-grid">
+          <div class="field field-wide">
+            <label for="major">What is your major?</label>
+            <select id="major" name="major" required>
+              <option value="biology">Biology</option>
+              <option value="exercise-science">Exercise Science</option>
+              <option value="neuroscience">Neuroscience</option>
+            </select>
+          </div>
+
+          <fieldset class="field field-wide route-fieldset">
+            <legend>What is your pre-professional route?</legend>
+            <div class="route-options">
+              <label class="route-option">
+                <input type="radio" name="route" value="pre-med" checked />
+                <span><strong>Pre-medical</strong><small>Medical school</small></span>
+              </label>
+              <label class="route-option">
+                <input type="radio" name="route" value="pre-dental" />
+                <span><strong>Pre-dental</strong><small>Dental school</small></span>
+              </label>
+              <label class="route-option">
+                <input type="radio" name="route" value="pre-pa" />
+                <span><strong>Pre-PA</strong><small>Physician assistant</small></span>
+              </label>
+              <label class="route-option">
+                <input type="radio" name="route" value="pre-pt" />
+                <span><strong>Pre-PT</strong><small>Physical therapy</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field science-load-field">
+            <label for="scienceLoad">How many science courses per semester?</label>
+            <select id="scienceLoad" name="scienceLoad">
+              <option value="1">1 science course</option>
+              <option value="2" selected>2 science courses (recommended)</option>
+              <option value="3">3 science courses</option>
+            </select>
+            <p class="field-help">The default pairs a biological science with a physical science when sequencing allows.</p>
+          </div>
+
+          <div class="field plan-start-field">
+            <label for="startTerm">Starting term</label>
+            <select id="startTerm" name="startTerm">
+              <option value="fall">Fall</option>
+              <option value="winter">Winter</option>
+            </select>
+            <p class="field-help">Used for the labels on your eight-semester plan.</p>
+          </div>
+
+          <div class="setup-actions">
+            <button class="primary-button" type="submit">Generate my plan <span aria-hidden="true">→</span></button>
+            <span class="form-status" id="formStatus" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </section>
+
+      <section class="plan-section" id="planSection" aria-labelledby="plan-title" hidden>
+        <div class="section-heading plan-heading">
+          <div>
+            <p class="eyebrow">Step 02</p>
+            <h2 id="plan-title" tabindex="-1">Your eight-semester template</h2>
+            <p class="plan-subtitle" id="planSubtitle"></p>
+          </div>
+          <button class="secondary-button" type="button" id="regenerateButton">Regenerate plan</button>
+        </div>
+
+        <div class="insight-grid" id="insightGrid" aria-label="Plan overview"></div>
+
+        <div class="spring-alert" id="springAlert" hidden>
+          <span class="alert-icon" aria-hidden="true">!</span>
+          <div>
+            <strong>Spring terms were added to protect your sequence.</strong>
+            <p>Your selected science load could not fit all representative prerequisites into the first six semesters. Review the spring courses with an advisor before registering.</p>
+          </div>
+        </div>
+
+        <div class="plan-toolbar">
+          <div>
+            <h3>Term-by-term plan</h3>
+            <p>Edit any course title to turn this template into your own working plan.</p>
+          </div>
+          <button class="secondary-button" type="button" id="addNoteButton">Add planning note</button>
+        </div>
+
+        <div class="term-grid" id="termGrid"></div>
+
+        <div class="later-iteration" aria-labelledby="import-title">
+          <div class="later-icon" aria-hidden="true">↥</div>
+          <div>
+            <p class="eyebrow">Planned next</p>
+            <h3 id="import-title">Import your academic summary</h3>
+            <p>In a later iteration, upload or paste your academic summary to mark completed courses, identify missing prerequisites, and regenerate a plan around what you have already finished.</p>
+          </div>
+          <button class="secondary-button" type="button" disabled aria-describedby="import-help">Coming later</button>
+          <span id="import-help" class="sr-only">Academic summary import is not available in this prototype.</span>
+        </div>
+
+        <div class="plan-footer-note">
+          <strong>Before you register:</strong> Compare this template against your current BYU catalog year, degree audit, and the prerequisite list for the specific medical, dental, PA, or PT programs you are considering.
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Prototype for planning conversations · Built with keyboard access and screen-reader-friendly structure in mind.</p>
+    </footer>
+
+    <template id="courseRowTemplate">
+      <li class="course-row">
+        <span class="course-dot" aria-hidden="true"></span>
+        <input class="course-input" type="text" />
+        <button class="icon-button remove-course" type="button" aria-label="Remove course">×</button>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
